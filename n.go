@@ -776,12 +776,13 @@ func (c *DmConnector) mergeConfigs(dsn string) error {
 	if group, ok := ServerGroupMap[strings.ToLower(host)]; ok {
 		c.group = group
 	} else {
-		host, port, err := net.SplitHostPort(host)
-		if err != nil || net.ParseIP(host) == nil {
-			c.host = hostDef
-		} else {
-			c.host = host
-		}
+		tmpHost, port, err := net.SplitHostPort(host)
+		//if err != nil || net.ParseIP(host) == nil {
+		//	c.host = hostDef
+		//} else {
+		//	c.host = host
+		//}
+		c.host = tmpHost
 		tmpPort, err := strconv.Atoi(port)
 		if err != nil {
 			c.port = portDef
